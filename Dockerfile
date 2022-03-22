@@ -1,6 +1,9 @@
 FROM registry.access.redhat.com/ubi8/nodejs-12:1-50
 
-RUN env |grep -i proxy && unset HTTP_PROXY && unset HTTPS_PROXY
+ENV http_proxy=""
+ENV https_proxy=""
+ENV HTTPS_PROXY=""
+
 WORKDIR /app
 COPY package*.json ./
 COPY . /app

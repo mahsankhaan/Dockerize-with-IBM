@@ -1,6 +1,6 @@
 FROM registry.access.redhat.com/ubi8/nodejs-12:1-50
-USER root
-RUN env |grep -i proxy && npm config set proxy https://registry.npmjs.org/ && npm config set https-proxy http://registry.npmjs.org/ && unset HTTP_PROXY && unset HTTPS_PROXY
+RUN chgrp -R 0 /run && chmod -R g=u /run
+RUN npm config set proxy https://registry.npmjs.org/ && npm config set https-proxy http://registry.npmjs.org/ && unset HTTP_PROXY && unset HTTPS_PROXY
 WORKDIR /app
 COPY package*.json ./
 COPY . /app

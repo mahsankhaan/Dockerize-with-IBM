@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/nodejs-12:1-50
+FROM  ubi8/nodejs-12
 
 WORKDIR /app
 COPY package*.json ./

@@ -1,4 +1,4 @@
-FROM  ubi8/nodejs-12
+FROM node:latest
 
 WORKDIR /app
 COPY package*.json ./

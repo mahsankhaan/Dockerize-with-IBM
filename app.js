@@ -18,10 +18,10 @@ app.get("/", function (req, res) {
     res.render("login");
 });
 
-var server = app.listen(port, function () {
+/*var server = app.listen(port, function () {
     console.log("Server listening on " + port);
-})
-module.exports.app = app;
-/*app.listen(3000 , function(){
+})*/
+//module.exports.app = app;
+app.listen(3000 , function(){
     console.log("App is running");
-});*/
+});

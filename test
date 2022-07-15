@@ -1,0 +1,8 @@
+          livenessProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /live
+              port: 3000
+              initialDelaySeconds: 60
+              periodSeconds: 30
+              timeoutSeconds: 5

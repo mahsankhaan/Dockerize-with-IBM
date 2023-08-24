@@ -1,24 +1,11 @@
-pipeline {
-  environment {
-    registry = "gustavoapolinario/docker-test"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
-  agent any
-  stages {
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/mahsankhaan/build-scalable-application-using-ibmcloud-docker.git'
+stage('Install dependencies') {
+  steps {
+    script {
+      def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+      withEnv(["DOCKER=${dockerTool}/bin"]) {
+          //stages
+           sh "sudo ${DOCKER}/docker version"
       }
     }
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + "1"
-        }
-      }
-    }
-
-
   }
 }

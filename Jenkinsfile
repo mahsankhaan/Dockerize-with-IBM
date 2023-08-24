@@ -7,7 +7,7 @@ stage('Install dependencies') {
       def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
       withEnv(["DOCKER=${dockerTool}/bin"]) {
           //stages
-           sh "sudo ${DOCKER}/docker version"
+           sh "${DOCKER}/docker version"
       }
     }
   }

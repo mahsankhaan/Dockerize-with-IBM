@@ -11,7 +11,7 @@ stage('Install dependencies') {
 
              ${DOCKER}/docker version
              ${DOCKER}/docker login -u ahsanoffical -p ahsan.123
-             ${DOCKER}/docker build -t ahsanoffical/avengers .
+             ${DOCKER}/docker build -tdocker build -t app .
 
              '''
              

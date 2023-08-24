@@ -1,18 +1,12 @@
 pipeline {
-  agent any
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
-  environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+  agent {
+    docker { image 'node:16-alpine' }
   }
   stages {
-        stage('Front-end') {
-            steps {
-                sh '''
-                   docker version
-              '''
-            }
-        }
+    stage('Test') {
+      steps {
+        sh 'node --version'
+      }
     }
   }
+}

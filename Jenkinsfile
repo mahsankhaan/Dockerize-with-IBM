@@ -7,16 +7,18 @@ pipeline {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
   }
   stages {
-    stage('Build') {
-      steps {
-        sh 'docker build -t ahsanoffical/test .'
-      }
-    }
-    stage('Login') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
-    }
+        stage("docker build & docker push"){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_password')]) {
+                             sh '''
+                                docker build -t 34.125.214.226:8083/springapp:v1 .
+
+                            '''
+                    }
+                }
+            }
+        }
   }
   post {
     always {

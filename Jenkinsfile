@@ -1,12 +1,24 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
+  environment {
+    registry = "gustavoapolinario/docker-test"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
   }
+  agent any
   stages {
-    stage('Test') {
+    stage('Cloning Git') {
       steps {
-        sh 'node --version'
+        git 'https://github.com/mahsankhaan/build-scalable-application-using-ibmcloud-docker.git'
       }
     }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + "1"
+        }
+      }
+    }
+
+
   }
 }

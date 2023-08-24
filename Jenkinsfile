@@ -7,20 +7,16 @@ pipeline {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
   }
   stages {
-        stage("docker build & docker push"){
-            steps{
-                script{
-                   
-                             sh '''
-                                docker login -u ahsanoffical -p ahsan.123
-
-                                docker build -t 34.125.214.226:8083/springapp:v1 .
-
-                            '''
-                    
-                }
+        stage('Front-end') {
+            agent {
+                docker { image 'node:18.17.1-alpine3.18' }
+            }
+            steps {
+                sh 'node --version'
             }
         }
+    }
+}
   }
 
 }

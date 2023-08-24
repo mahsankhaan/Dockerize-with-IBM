@@ -8,11 +8,10 @@ pipeline {
   }
   stages {
         stage('Front-end') {
-            agent {
-                docker { image 'node:18.17.1-alpine3.18' }
-            }
             steps {
-                sh 'node --version'
+                sh '''
+                   docker version
+              '''
             }
         }
     }

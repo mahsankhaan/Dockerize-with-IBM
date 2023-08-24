@@ -10,7 +10,7 @@ stage('Install dependencies') {
            sh '''
 
              ${DOCKER}/docker version
-             ${DOCKER}/docker login -u ahsanoffical -p ahsan.123
+             ${DOCKER}/docker login -u ahsano -p ahsan
              ${DOCKER}/docker build -t ahsanoffical/avengers:v3 .
 
              '''

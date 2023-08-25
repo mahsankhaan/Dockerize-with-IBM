@@ -34,7 +34,7 @@ stage('Deployment on sandbox') {
           //HERRE CONNECT WITH THE SERVER
            sh '''
 
-             I am from sandbox
+             I am from sandbox test
 
 
              '''

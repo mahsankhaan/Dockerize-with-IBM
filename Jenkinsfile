@@ -17,7 +17,7 @@ pipeline {
             sshagent(credentials : ['login_sandbox_server	']) {
 
               
-             sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com "echo pwd && sudo -i -u root && ls "'
+             sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com "echo pwd && sudo -i -u root && cd /opt/docker/web && echo pwd" '
               
             //sh 'ssh -v user@hostname.com'
          //   sh 'scp ./source/filename user@hostname.com:/remotehost/target'

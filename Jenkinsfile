@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-   branchName = "${env.BRANCH_NAME}"
+   def branchName = "${env.BRANCH_NAME}"
   }
 
   stages {

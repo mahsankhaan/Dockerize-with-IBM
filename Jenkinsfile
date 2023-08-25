@@ -26,7 +26,7 @@ pipeline {
           if(branch == 'origin/jenkins')
 {
                 echo "I am from jenkins"
-                echo "Current user is ${env.USER_NAME}"
+          //      echo "Current user is ${env.USER_NAME}"
 
  }
           //println GIT_BRANCH

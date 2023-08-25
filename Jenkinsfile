@@ -17,9 +17,8 @@ pipeline {
 
           println 'Getting current Branchss'
           println GIT_BRANCH
-
           def branch = GIT_BRANCH
-          if(branch == 'jenkins')
+          if(branch == 'origin/jenkins')
 {
                 echo "I am from jenkins"
 

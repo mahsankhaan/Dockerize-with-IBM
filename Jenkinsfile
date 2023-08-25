@@ -15,8 +15,10 @@ pipeline {
           //   sh 'ssh -i  /root/.ssh/"sandbox-env.pem"  ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com'
              //  ssh -i  /home/ubuntu/.ssh/"sanbox-env.pem" 'ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com'
             sshagent(credentials : ['login_sandbox_server	']) {
-            ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com 
 
+              script{
+              ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com 
+              }
             //sh 'ssh -v user@hostname.com'
          //   sh 'scp ./source/filename user@hostname.com:/remotehost/target'
         }

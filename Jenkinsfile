@@ -15,7 +15,7 @@ pipeline {
 
           println(git_params)
 
-          println 'Getting current Branch'
+          println 'Getting current Branchs'
 
           println 'GIT_BRANCH'
         }

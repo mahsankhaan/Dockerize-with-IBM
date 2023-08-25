@@ -8,14 +8,6 @@ pipeline {
 
 
   stages {
-    stage('login server'){
-         steps{
-            sshagent(credentials:['login_sandbox_server']){
-               sh 'ssh  -o StrictHostKeyChecking=no  root@18.204.4.100 uptime "whoami"'
-          }
-        echo "success lgoin"
-         }
-       }
     stage('checkout') {
       steps {
         script {

@@ -2,14 +2,14 @@ pipeline {
   agent any
 
   environment {
-   def branchName = "${env.BRANCH_NAME}"
+   def branchName = GIT_BRANCH
   }
 
   stages {
     stage('checkout') {
       steps {
         script {
-          def git_params = checkout([$class: 'GitSCM'])
+         // def git_params = checkout([$class: 'GitSCM'])
           //gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
    
 

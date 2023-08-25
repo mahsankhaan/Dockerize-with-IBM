@@ -11,10 +11,18 @@ pipeline {
       steps {
         script {
           def git_params = checkout([$class: 'GitSCM'])
+          gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+          branchName = sh(
+                  returnStdout: true,
+                  script: "git branch -a --contains ${gitCommit} | grep -v PR- | sed 's/^.*\\///' | tail -1"
+          ).trim()
+
+
+
 
           println 'Getting current Branchs'
-
-          println GIT_BRANCH
+           branchName
+       //   println GIT_BRANCH
 
 
         }

@@ -11,7 +11,8 @@ pipeline {
     stage('login server'){
       steps{
             sshagent(credentials:['18.204.4.100']){
-            sh 'ssh  -o StrictHostKeyChecking=no  ubuntu@18.204.4.100 "whoami"'
+            sh 'ssh  -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com "whoami"'
+
           }
            echo "success lgoin"
          }

@@ -3,7 +3,7 @@ pipeline {
 
   environment {
    def branchName = "${env.BRANCH_NAME}"
-		USER_NAME = "Tester"
+   USER_NAME = "Tester"
 }
 
   }

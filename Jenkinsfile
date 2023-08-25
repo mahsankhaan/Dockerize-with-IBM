@@ -18,7 +18,7 @@ pipeline {
           println 'Getting current Branchss'
         //  println GIT_BRANCH
 
-
+          println branchName
           if(branchName == 'jenkins')
 {
                 echo "I am from jenkins"

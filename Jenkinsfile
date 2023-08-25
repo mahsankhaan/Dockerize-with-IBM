@@ -3,6 +3,7 @@ pipeline {
 
   environment {
     GIT_CRED_ID = 'SVC-JENKINS-ADM'
+    branchName = GIT_BRANCH
 
   }
 
@@ -14,11 +15,16 @@ pipeline {
           //gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
    
 
-          def branchName = "${env.BRANCH_NAME}"
 
 
           println 'Getting current Branchss'
-          println GIT_BRANCH
+          if(branchName == 'jenkins')
+{
+                echo "I am from jenkins"
+
+
+ }
+          //println GIT_BRANCH
 
 
         }

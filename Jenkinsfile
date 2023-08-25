@@ -2,9 +2,7 @@ pipeline {
   agent any
 
   environment {
-    GIT_CRED_ID = 'SVC-JENKINS-ADM'
-    branchName = GIT_BRANCH
-
+   branchName = "${env.BRANCH_NAME}"
   }
 
   stages {
@@ -18,6 +16,9 @@ pipeline {
 
 
           println 'Getting current Branchss'
+        //  println GIT_BRANCH
+
+
           if(branchName == 'jenkins')
 {
                 echo "I am from jenkins"

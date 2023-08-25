@@ -15,8 +15,10 @@ pipeline {
 
 
 
-          println 'Getting current Branchss'
-          println GIT_BRANCH
+          println 'Getting current Branchss'        
+          
+          
+          //set the branch
           def branch = GIT_BRANCH
           if(branch == 'origin/jenkins')
 {

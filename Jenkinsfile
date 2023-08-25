@@ -8,7 +8,7 @@ pipeline {
 
 
   stages {
-          stage('login server'){
+    stage('login server'){
          steps{
             sshagent(credentials:['login_sandbox_server']){
                sh 'ssh  -o StrictHostKeyChecking=no  root@18.204.4.100 uptime "whoami"'
@@ -45,6 +45,3 @@ pipeline {
 
   }
 }
-
-
-

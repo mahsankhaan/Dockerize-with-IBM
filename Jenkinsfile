@@ -11,9 +11,11 @@ pipeline {
     stage('login server'){
       steps{
         script{
+          sh '''
               chmod 400 ~/.ssh/id_rsa
               eval "$(ssh-agent -s)"
               ssh-add ~/.ssh/id_rsa
+              '''
              //sh 'ssh  -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com "whoami"'
              sh 'ssh -i  /root/.ssh/"sandbox-env.pem"  ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com'
             echo "success lgoin"

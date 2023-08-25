@@ -17,7 +17,7 @@ pipeline {
           def branchName = "${env.BRANCH_NAME}"
 
 
-          println 'Getting current Branchs'
+          println 'Getting current Branchss'
           println branchName
        //   println GIT_BRANCH
 

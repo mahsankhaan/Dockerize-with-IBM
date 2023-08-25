@@ -12,12 +12,10 @@ pipeline {
       steps{
         script{
           sh '''
-              chmod 400 ~/.ssh/id_rsa
-              eval "$(ssh-agent -s)"
-              ssh-add ~/.ssh/id_rsa
+               ssh -i  /home/ubuntu/.ssh/"sanbox-env.pem"/ 'ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com'
               '''
              //sh 'ssh  -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com "whoami"'
-             sh 'ssh -i  /root/.ssh/"sandbox-env.pem"  ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com'
+          //   sh 'ssh -i  /root/.ssh/"sandbox-env.pem"  ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com'
             echo "success lgoin"
          }
       }

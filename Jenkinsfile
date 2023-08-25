@@ -16,6 +16,8 @@ pipeline {
           println(git_params)
 
           println 'Getting current Branchs'
+          sh "echo 'branchName: ${branchName}'" 
+
 
           println GIT_BRANCH
         }

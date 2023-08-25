@@ -3,6 +3,9 @@ pipeline {
 
   environment {
    def branchName = "${env.BRANCH_NAME}"
+		USER_NAME = "Tester"
+}
+
   }
 
   stages {
@@ -23,7 +26,7 @@ pipeline {
           if(branch == 'origin/jenkins')
 {
                 echo "I am from jenkins"
-
+                echo "Current user is ${env.USER_NAME}"
 
  }
           //println GIT_BRANCH

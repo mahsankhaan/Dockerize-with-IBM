@@ -21,7 +21,7 @@ pipeline {
 
 
           println 'Getting current Branchs'
-           branchName
+          println branchName
        //   println GIT_BRANCH
 
 

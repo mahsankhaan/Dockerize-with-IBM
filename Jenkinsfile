@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-   def branchName = GIT_BRANCH
+   def branchName = ${env.BRANCH_NAME}"
   }
 
   stages {
@@ -19,7 +19,7 @@ pipeline {
         //  println GIT_BRANCH
 
           println branchName
-          if(branchName == 'jenkins')
+          if(GIT_BRANCH == 'jenkins')
 {
                 echo "I am from jenkins"
 

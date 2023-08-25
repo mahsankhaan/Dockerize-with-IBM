@@ -1,71 +1,26 @@
 pipeline {
-   agent any
-   stages {
-stage('Install dependencies') {
-  steps {
-    script {
-      def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-      withEnv(["DOCKER=${dockerTool}/bin"]) {
-          //stages
-           sh '''
+  agent any
 
-             ${DOCKER}/docker version
+  environment {
+    GIT_CRED_ID = 'SVC-JENKINS-ADM'
 
+    GIT_REPO = 'https://github.com/mahsankhaan/build-scalable-application-using-ibmcloud-docker.git'
+  }
 
-             '''
-             
+  stages {
+    stage('checkout') {
+      steps {
+        script {
+          def git_params = checkout([$class: 'GitSCM'])
+
+          println(git_params)
+
+          println 'Getting current Branch'
+
+          println 'GIT_BRANCH'
+        }
       }
     }
+
   }
-}
-
-
-stage('Deployment on sandbox') {
- when {
-                branch 'sandbox'
-            }
-
-  steps {
-    script {
-      def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-      withEnv(["DOCKER=${dockerTool}/bin"]) {
-
-
-          //HERRE CONNECT WITH THE SERVER
-           sh '''
-
-             I am from sandbox test
-
-
-             '''
-             
-      }
-    }
-  }
-}
-stage('Deployment on Development') {
- when {
-                branch 'jenkins'
-            }
-
-  steps {
-    script {
-      def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-      withEnv(["DOCKER=${dockerTool}/bin"]) {
-
-
-          //HERRE CONNECT WITH THE SERVER
-           sh '''
-
-             I am from Development branch
-
-
-             '''
-             
-      }
-    }
-  }
-}
-      
-   }
 }

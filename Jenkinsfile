@@ -6,7 +6,6 @@ pipeline {
    USER_NAME = "Tester"
 }
 
-  }
 
   stages {
     stage('checkout') {
@@ -19,17 +18,17 @@ pipeline {
 
 
           println 'Getting current Branchss'        
-          
+          //println GIT_BRANCH
+
           
           //set the branch
           def branch = GIT_BRANCH
           if(branch == 'origin/jenkins')
 {
                 echo "I am from jenkins"
-          //      echo "Current user is ${env.USER_NAME}"
+               echo "Current user is ${env.USER_NAME}"
 
  }
-          //println GIT_BRANCH
 
 
         }

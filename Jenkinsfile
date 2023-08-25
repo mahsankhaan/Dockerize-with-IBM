@@ -14,7 +14,6 @@ pipeline {
           sh '''
                whoami
                pwd
-               su ubuntu
                whoami
               '''
              //sh 'ssh  -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com "whoami"'

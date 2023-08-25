@@ -11,7 +11,7 @@ pipeline {
     stage('login server'){
       steps{
             sshagent(credentials:['login_sandbox_server']){
-            sh 'ssh  -o StrictHostKeyChecking=no  root@ip-10-0-24-145 uptime "whoami"'
+            sh 'ssh  -o StrictHostKeyChecking=no  root@18.204.4.100 "whoami"'
           }
            echo "success lgoin"
          }

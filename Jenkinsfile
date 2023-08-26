@@ -21,7 +21,7 @@ pipeline {
                    //stages
                     sh '''
                        ${DOCKER}/docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
-                       ${DOCKER}/docker build -t aboukrouh/jenkins:v1 .
+                       ${DOCKER}/docker build -t aboukrouh/jenkins:v2 .
                        ${DOCKER}/docker push aboukrouh/jenkins:v2
 
                       '''

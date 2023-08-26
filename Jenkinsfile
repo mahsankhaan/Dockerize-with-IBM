@@ -12,6 +12,27 @@ pipeline {
 
 
   stages {
+
+      stage('Build Docker Image and Push to DockerHub'){
+                    steps {
+             script {
+               def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+               withEnv(["DOCKER=${dockerTool}/bin"]) {
+                   //stages
+                    sh '''
+                       ${DOCKER}/docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW
+                       ${DOCKER}/docker build -t aboukrouh/jenkins:v1 .
+                       ${DOCKER}/docker push aboukrouh/jenkins:v1
+
+                      '''
+                      
+               }
+             }
+           }
+      }
+
+
+
     stage('login server'){
       steps{
       

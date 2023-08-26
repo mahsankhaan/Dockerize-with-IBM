@@ -18,7 +18,6 @@ pipeline {
         
            // sshagent(credentials : ['login_sandbox_server	']) {
               sshagent(credentials : ['login_sandbox_env'])  {
-              login_sandbox_env
              sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-204-4-100.compute-1.amazonaws.com "echo pwd && sudo -i -u root && docker -v && docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW"'
               
             //sh 'ssh -v user@hostname.com'

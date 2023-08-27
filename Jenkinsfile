@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    GIT_CRED_ID = 'SVC-JENKINS-'
+    GIT_CRED_ID = 'SVC-JENKIN'
 
   }
 

@@ -10,8 +10,8 @@ pipeline {
                 def gitrepo = scm.getUserRemoteConfigs()[0].getUrl()
                 def reponame= scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
 
-
-                build job: 'sandboxserver', wait: false, parameters: [string(name: 'branchname', value: branchname ),string(name: 'reponame', value: reponame ), string(name: 'gitrepo', value: gitrepo )] 
+                 echo "ref name is ${reponame}" 
+           //     build job: 'sandboxserver', wait: false, parameters: [string(name: 'branchname', value: branchname ),string(name: 'reponame', value: reponame ), string(name: 'gitrepo', value: gitrepo )] 
                 
 
                 }

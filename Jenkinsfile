@@ -1,25 +1,21 @@
 pipeline {
-  agent any
-
-  environment {
-    GIT_CRED_ID = 'SVC-N'
-
-  }
-
-  stages {
-    stage('checkout') {
-      steps {
-        script {
-          def git_params = checkout([$class: 'GitSCM'])
-
-          println 'Getting current Branchs'
-
-          println GIT_BRANCH
+    agent any
 
 
+    stages {
+        stage('Start'){
+            steps{
+                script{
+                def branchname = GIT_BRANCH
+                def gitrepo = scm.getUserRemoteConfigs()[0].getUrl()
+                def reponame= scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+
+
+                build job: 'sandboxserver', wait: false, parameters: [string(name: 'branchname', value: branchname ),string(name: 'reponame', value: reponame ), string(name: 'gitrepo', value: gitrepo )] 
+                
+
+                }
+            }
         }
-      }
     }
-
-  }
 }

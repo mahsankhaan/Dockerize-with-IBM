@@ -1,45 +1,21 @@
 pipeline {
-   agent any
-   stages {
-stage('Install dependencies') {
-  steps {
-    script {
-      def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-      withEnv(["DOCKER=${dockerTool}/bin"]) {
-          //stages
-           sh '''
-
-             ${DOCKER}/docker version
+    agent any
 
 
-             '''
-             
-      }
+    stages {
+        stage('Start'){
+            steps{
+                script{
+                def branchname = GIT_BRANCH
+                def gitrepo = scm.getUserRemoteConfigs()[0].getUrl()
+                def reponame= scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+
+
+                build job: 'sandboxserver', wait: false, parameters: [string(name: 'branchname', value: branchname ),string(name: 'reponame', value: reponame ), string(name: 'gitrepo', value: gitrepo )] 
+                
+
+                }
+            }
+        }
     }
-  }
-}
-
-
-stage('Deployment on server') {
-  steps {
-    script {
-      def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-      withEnv(["DOCKER=${dockerTool}/bin"]) {
-
-
-          //HERRE CONNECT WITH THE SERVER
-           sh '''
-
-             ${DOCKER}/docker version
-
-
-             '''
-             
-      }
-    }
-  }
-}
-
-      
-   }
 }

@@ -47,7 +47,7 @@ pipeline {
 
               // Clones the repository from the triggered release tag name
 //              checkout([$class: 'GitSCM', branches: [[name: "refs/tags/${params.branchname}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: false, reference: '', trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub", url: "https://github.com/LambdaX-AI/demo-repository.git"]]])
-               checkout([$class: 'GitSCM', branches: [[name: "refs/tags/${params.branchname}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: false, reference: '', trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub", url: "https://github.com/mahsankhaan/build-scalable-application-using-ibmcloud-docker.git"]]])
+               checkout([$class: 'GitSCM', branches: [[name: "refs/tags/${params.branchname}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: false, reference: '', trackingSubmodules: false]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "GitHub", url: "https://github.com/LambdaX-AI/ai-extractor.git"]]])
 
                 //
               }     
@@ -67,7 +67,7 @@ pipeline {
         
     }
 // check release and the perform deployment on the server
-
+/*
        stage('Check Incoming release from which Branch') {
             steps {
                 script {
@@ -84,7 +84,7 @@ pipeline {
             }
         }
     
-     
+     */
       stage('Build Docker Image and Push to DockerHub'){
            steps {                       
               
@@ -103,23 +103,31 @@ pipeline {
       steps{ 
 
                 script {
-                    if (params.branchname.contains('QA')) {
+                    if (params.branchname.contains('qa')) {
                         echo 'I only execute on the QA release'
-                           sshagent(credentials : ['login_sandbox_env'])  {          
-                            sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-23.amazonaws.com 'echo pwd && sudo -i -u root && docker -v && docker login  -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW && docker pull aboukrouh/${params.reponame}:${params.repotag} && (docker rm -f ${params.branchname} || true) && docker run --name ${params.branchname} -d  -v /data/appvol:/root/.paddleocr aboukrouh/${params.reponame}:${params.repotag}'"
+                           sshagent(credentials : ['login_sandbox_env'])  {    
 
-                     }
-                    } else if (params.branchname.contains('sandbox')) {
+                            echo 'I only execute on the QA release'
+
+                            //command to remove the container
+                            //(docker rm -f $(sudo docker ps -a | grep -E 'qa|QA|' | awk '{print $1}') || true)
+                            //    docker images | grep 643975c526cf  | awk '{print $1 ":" $2}' | sort -u | xargs docker rmi -f
+
+                            
+                         //   sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-23-21-75-40.compute-1.amazonaws.com 'echo pwd && sudo -i -u root && docker -v && docker login  -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW  && docker pull aboukrouh/${params.reponame}:${params.repotag} && docker run --name ${params.branchname}-qa -d -v /data/appvol:/root/.paddleocr aboukrouh/${params.reponame}:${params.repotag}'"
+                           }
+                    }
+                     
+                    // else if (params.branchname.contains('sandbox')) {
+                     else{
                         echo 'I only execute on the sandbox release'
                           sshagent(credentials : ['login_sandbox_env'])  {          
-                            sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-23.amazonaws.com 'echo pwd && sudo -i -u root && docker -v && docker login  -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW && docker pull aboukrouh/${params.reponame}:${params.repotag} && (docker rm -f ${params.reponame}-sandbox || true) && docker run --name ${params.reponame}-${params.repotag} -d -p 5000:80 -v /data/appvol:/root/.paddleocr aboukrouh/${params.reponame}:${params.repotag}'"
+                           // sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-23-21-75-40.compute-1.amazonaws.com 'echo pwd && sudo -i -u root && docker -v && docker login  -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW && docker pull aboukrouh/${params.reponame}:${params.repotag} && (docker rm -f ${params.reponame}-sandbox || true) && docker run --name ${params.reponame}-${params.repotag} -d -p 5000:80 -v /data/appvol:/root/.paddleocr aboukrouh/${params.reponame}:${params.repotag}'"
+                            sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-23-21-75-40.compute-1.amazonaws.com 'echo pwd && sudo -i -u root && docker -v && docker login  -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW && docker pull aboukrouh/${params.reponame}:${params.repotag} && docker run --name ${params.reponame}-${params.repotag} -d -v /data/appvol:/root/.paddleocr aboukrouh/${params.reponame}:${params.repotag}'"
 
                      }
                     }
-                      else {
-                         echo 'unKnown release'
 
-                      }
                 }
               
       }

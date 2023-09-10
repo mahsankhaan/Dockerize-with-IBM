@@ -10,6 +10,15 @@ RUN apk --no-cache --no-progress upgrade && \
     apk add shadow
 
 
+
+WORKDIR /app
+COPY package*.json ./
+COPY . /app
+RUN npm -v
+RUN npm install --loglevel verbose
+EXPOSE 3000
+#CMD [ "node", "app.js"]
+
 COPY openvpn.sh /usr/bin/
 RUN chmod 755 /usr/bin/openvpn.sh
 COPY ./vpn /vpn
@@ -21,11 +30,3 @@ HEALTHCHECK --interval=60s --timeout=15s --start-period=120s \
 VOLUME ["vpn"]
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/openvpn.sh"]
-
-WORKDIR /app
-COPY package*.json ./
-COPY . /app
-RUN npm -v
-RUN npm install --loglevel verbose
-EXPOSE 3000
-CMD [ "node", "app.js"]
